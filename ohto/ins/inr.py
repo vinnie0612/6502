@@ -9,6 +9,7 @@ def updateFlags(cpu, value: int):
   return cpu
 
 def runInstruction(opcode, cpu, cycles):
+  value = 0
   match opcode:
     case 0xE8: # INX
       cpu.x += 1
@@ -42,5 +43,6 @@ def runInstruction(opcode, cpu, cycles):
       cpu.ram.write(address, value)
       cycles -= 5
 
-  cpu = updateFlags(cpu, value)
+  if value:
+    cpu = updateFlags(cpu, value)
   return cpu, cycles

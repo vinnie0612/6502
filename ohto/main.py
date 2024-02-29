@@ -3,12 +3,12 @@ from cpu import CPU
 
 def main():
   ram = RAM(64 * 1024)
-  cpu = CPU(ram)
+  cpu = CPU(ram, singleStep=False, delay=0.03, debug=True)
 
-  cpu.reset()
   ram.initialize_from_binary("rom.bin")
+  cpu.reset()
 
-  cpu.execute(300)
+  cpu.execute(forever=True)
 
 if __name__ == "__main__":
   main()

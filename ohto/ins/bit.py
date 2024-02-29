@@ -15,6 +15,7 @@ def runInstruction(opcode, cpu, cycles):
       cpu.flags['v'] = (value & 0b01000000) > 0
       cpu.flags['n'] = (value & 0b10000000) > 0
       cycles -= 3
+      cpu.pc += 2
 
     case 0x24: # BIT zero page
       address = cpu.ram.read(cpu.pc)
@@ -23,3 +24,5 @@ def runInstruction(opcode, cpu, cycles):
       cpu.flags['v'] = (value & 0b01000000) > 0
       cpu.flags['n'] = (value & 0b10000000) > 0
       cycles -= 2
+
+  return cpu, cycles

@@ -29,3 +29,5 @@ def runInstruction(opcode, cpu, cycles):
     case 0x78: # SEI
       cpu.flags['i'] = True
       cycles -= 1
+
+  return cpu, cycles

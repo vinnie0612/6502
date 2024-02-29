@@ -11,6 +11,9 @@ def runInstruction(opcode, cpu, cycles):
           offset -= 0x100
         cpu.pc += offset
         cycles -= 1
+      else:
+        cpu.pc += 1
+        cycles -= 1
 
     case 0xB0: # BCS
       if cpu.flags['c']:
@@ -21,6 +24,9 @@ def runInstruction(opcode, cpu, cycles):
           offset -= 0x100
         cpu.pc += offset
         cycles -= 1
+      else:
+        cpu.pc += 1
+        cycles -= 1
 
     case 0xF0: # BEQ
       if cpu.flags['z']:
@@ -29,7 +35,11 @@ def runInstruction(opcode, cpu, cycles):
         cycles -= 1
         if offset & 0x80:
           offset -= 0x100
+        print(f"BEQ offset: {offset}")
         cpu.pc += offset
+        cycles -= 1
+      else:
+        cpu.pc += 1
         cycles -= 1
 
     case 0x30: # BMI
@@ -41,6 +51,9 @@ def runInstruction(opcode, cpu, cycles):
           offset -= 0x100
         cpu.pc += offset
         cycles -= 1
+      else:
+        cpu.pc += 1
+        cycles -= 1
 
     case 0xD0: # BNE
       if not cpu.flags['z']:
@@ -50,6 +63,9 @@ def runInstruction(opcode, cpu, cycles):
         if offset & 0x80:
           offset -= 0x100
         cpu.pc += offset
+        cycles -= 1
+      else:
+        cpu.pc += 1
         cycles -= 1
 
     case 0x10: # BPL
@@ -61,6 +77,9 @@ def runInstruction(opcode, cpu, cycles):
           offset -= 0x100
         cpu.pc += offset
         cycles -= 1
+      else:
+        cpu.pc += 1
+        cycles -= 1
 
     case 0x50: # BVC
       if not cpu.flags['v']:
@@ -71,6 +90,9 @@ def runInstruction(opcode, cpu, cycles):
           offset -= 0x100
         cpu.pc += offset
         cycles -= 1
+      else:
+        cpu.pc += 1
+        cycles -= 1
 
     case 0x70: # BVS
       if cpu.flags['v']:
@@ -80,6 +102,9 @@ def runInstruction(opcode, cpu, cycles):
         if offset & 0x80:
           offset -= 0x100
         cpu.pc += offset
+        cycles -= 1
+      else:
+        cpu.pc += 1
         cycles -= 1
 
   return cpu, cycles
